@@ -105,7 +105,7 @@ export default function DashboardPage() {
 
                     <div className="mt-4">
                       <p className="text-sm text-gray-500">
-                        This API key will immediately be disabled. API requests made using this key will be rejected, which could cause any systems still depending on it to break. Once revoked, you'll no longer be able to view or modify this API key.
+                        This API key will immediately be disabled. API requests made using this key will be rejected, which could cause any systems still depending on it to break. Once revoked, you&apos;ll no longer be able to view or modify this API key.
                       </p>
                     </div>
 
