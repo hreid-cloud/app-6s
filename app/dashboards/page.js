@@ -5,12 +5,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import DashboardLayout from '@/components/DashboardLayout';
 import ApiKeyList from '@/components/ApiKeyList';
 import CreateApiKeyForm from '@/components/CreateApiKeyForm';
-import { showSuccessToast, showErrorToast } from '@/notifications/toast';
 
 export default function DashboardPage() {
   const { apiKeys, loading, error, createApiKey, deleteApiKey, setError } = useApiKeys();
@@ -20,10 +17,10 @@ export default function DashboardPage() {
   const copyToClipboard = async (value) => {
     try {
       await navigator.clipboard.writeText(value);
-      showSuccessToast('API key copied to clipboard');
+      alert('API key copied to clipboard');
     } catch (err) {
       console.error('Failed to copy text: ', err);
-      showErrorToast('Failed to copy to clipboard');
+      alert('Failed to copy to clipboard');
     }
   };
 
@@ -45,8 +42,6 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="min-h-screen">
-        <ToastContainer />
-        
         <h1 className="text-2xl font-bold mb-8">API Key Management</h1>
         
         {error && (

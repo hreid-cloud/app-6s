@@ -2,14 +2,11 @@
 import { useState } from 'react';
 import { supabase } from '@/utils/supabase';
 import DashboardLayout from '@/components/DashboardLayout';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
-import { showSuccessToast, showErrorToast } from '@/notifications/toast';
 
 export default function PlaygroundPage() {
   const [apiKey, setApiKey] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState('');
   const router = useRouter();
 
   const validateApiKey = async (e) => {
@@ -26,7 +23,7 @@ export default function PlaygroundPage() {
         .single();
 
       if (error || !data) {
-        showErrorToast('Invalid API key.');
+        alert('Invalid API key.');
         return;
       }
 
@@ -38,7 +35,7 @@ export default function PlaygroundPage() {
 
       if (updateError) throw updateError;
 
-      showSuccessToast('Valid API key, redirecting to protected route...');
+      alert('Valid API key, redirecting to protected route...');
 
       // Redirect to protected route after a short delay to show the success message
       setTimeout(() => {
@@ -47,7 +44,7 @@ export default function PlaygroundPage() {
 
     } catch (error) {
       console.error('Error validating API key:', error);
-      showErrorToast('Error validating API key.');
+      alert('Error validating API key.');
     } finally {
       setLoading(false);
     }
@@ -56,8 +53,6 @@ export default function PlaygroundPage() {
   return (
     <DashboardLayout>
       <div className="min-h-screen">
-        <ToastContainer />
-        
         <h1 className="text-2xl font-bold mb-8">API Playground</h1>
         
         <div className="max-w-2xl">
