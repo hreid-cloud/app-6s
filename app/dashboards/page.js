@@ -1,19 +1,16 @@
 'use client';
 import { useApiKeys } from '@/hooks/useApiKeys';
 import { 
-  ClipboardDocumentIcon, 
-  EyeIcon, 
-  EyeSlashIcon, 
-  TrashIcon,
-  InformationCircleIcon,
   ExclamationTriangleIcon
 } from '@heroicons/react/24/outline';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import DashboardLayout from '@/components/DashboardLayout';
 import ApiKeyList from '@/components/ApiKeyList';
 import CreateApiKeyForm from '@/components/CreateApiKeyForm';
+import { showSuccessToast, showErrorToast } from '@/notifications/toast';
 
 export default function DashboardPage() {
   const { apiKeys, loading, error, createApiKey, deleteApiKey, setError } = useApiKeys();
@@ -23,25 +20,10 @@ export default function DashboardPage() {
   const copyToClipboard = async (value) => {
     try {
       await navigator.clipboard.writeText(value);
-      toast.custom((t) => (
-        <div className={`${t.visible ? 'animate-enter' : 'animate-leave'} max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}>
-          <div className="flex-1 w-0 p-4">
-            <div className="flex items-start">
-              <div className="flex-shrink-0 pt-0.5">
-                <InformationCircleIcon className="h-5 w-5 text-blue-500" />
-              </div>
-              <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-gray-900">
-                  API key copied to clipboard
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ), { duration: 2000 });
+      showSuccessToast('API key copied to clipboard');
     } catch (err) {
       console.error('Failed to copy text: ', err);
-      setError('Failed to copy to clipboard');
+      showErrorToast('Failed to copy to clipboard');
     }
   };
 
@@ -63,7 +45,7 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="min-h-screen">
-        <Toaster position="top-right" />
+        <ToastContainer />
         
         <h1 className="text-2xl font-bold mb-8">API Key Management</h1>
         
