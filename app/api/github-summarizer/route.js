@@ -31,8 +31,39 @@ export async function POST(request) {
       throw updateError;
     }
 
+    // Get GitHub URL from request body
+    const { githubUrl } = await request.json();
+    if (!githubUrl) {
+      return NextResponse.json({ error: 'GitHub URL is required' }, { status: 400 });
+    }
+
+    // Extract owner and repo from GitHub URL
+    const urlParts = githubUrl.replace('https://github.com/', '').split('/');
+    const owner = urlParts[0];
+    const repo = urlParts[1];
+
+    // Fetch README content from GitHub API
+    const response = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/readme`,
+      {
+        headers: {
+          'Accept': 'application/vnd.github.v3.raw'
+        }
+      }
+    );
+
+    if (!response.ok) {
+      return NextResponse.json({ 
+        error: 'Failed to fetch README from GitHub'
+      }, { status: response.status });
+    }
+
+    const readmeContent = await response.text();
+    console.log(readmeContent);
+
     // TODO: Add your GitHub summarizer logic here
     // For now, just return a success message
+    
     return NextResponse.json({ 
       success: true, 
       message: 'API key validated successfully. Ready to process GitHub summary request.' 
