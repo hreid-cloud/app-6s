@@ -27,7 +27,7 @@ export async function summarizeGithubRepo(readmeContent) {
   );
 
   const model = new ChatOpenAI({
-    temperature: 0.3,
+    temperature: 0.0,
     modelName: "gpt-3.5-turbo",
   });
 
