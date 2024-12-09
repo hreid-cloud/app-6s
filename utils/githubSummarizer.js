@@ -1,7 +1,7 @@
-import { ChatOpenAI } from "langchain/openai";
-import { PromptTemplate } from "langchain/prompts";
-import { RunnableSequence } from "langchain/schema/runnable";
-import { StructuredOutputParser } from "langchain/output_parsers";
+import { ChatOpenAI } from "@langchain/openai";
+import { PromptTemplate } from "@langchain/prompts";
+import { RunnableSequence } from "@langchain/schema/runnable";
+import { StructuredOutputParser } from "@langchain/output_parsers";
 import { z } from "zod";
 
 export async function summarizeGithubRepo(readmeContent) {
