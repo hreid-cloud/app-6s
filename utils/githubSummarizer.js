@@ -16,13 +16,14 @@ export async function summarizeGithubRepo(readmeContent) {
 
   const model = new ChatOpenAI({ 
     temperature: 0.0,
+    model:"gpt-4o-mini",
     openAIApiKey: process.env.OPEN_AI_KEY 
   }).withStructuredOutput(responseSchema);
   // Format instructions for the model
   const prompt = ChatPromptTemplate.fromTemplate(`
 
     Summarize this github repository from this README file content:
-    
+
     {readmeContent}
     
     Provide:
