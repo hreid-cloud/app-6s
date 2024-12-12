@@ -21,6 +21,8 @@
     "add": "^2.0.6",
     "button": "^1.1.1",
     "card": "^2.5.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "langchain": "^0.3.6",
     "lucide-react": "^0.468.0",
     "next": "15.0.3",
@@ -28,6 +30,8 @@
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "shadcn": "^2.1.7",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.7.2",
     "uuid": "^11.0.3"
   },
@@ -35,6 +39,7 @@
     "@langchain/core": "0.3.19"
   },
   "devDependencies": {
+    "@types/react": "19.0.1",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
